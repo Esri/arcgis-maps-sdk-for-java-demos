@@ -1,0 +1,16 @@
+rootProject.name = 'arran-runtime-blog-post'
+
+// download LiDAR data
+def ant = new groovy.util.AntBuilder()
+
+if (!file("./data").exists()) {
+    ant.get(
+            src: "https://arcgisruntime.maps.arcgis.com/sharing/rest/content/items/ce99a45b9e664b4ebe3cb1cedf552b1d/data",
+            dest: file("./data.zip")
+    )
+    ant.unzip(
+            src: file("./data.zip"),
+            dest: file("./data")
+    )
+    delete file("./data.zip")
+}
