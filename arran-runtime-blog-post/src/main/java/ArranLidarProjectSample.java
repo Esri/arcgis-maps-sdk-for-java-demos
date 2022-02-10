@@ -84,7 +84,6 @@ public class ArranLidarProjectSample extends Application {
 
             // loop through the GeoTIFFs
             for (String geoTiffFile : geoTiffFiles) {
-
               // create a raster from every GeoTIFF
               var raster = new Raster(geoTiffFile);
               // create a raster layer from the raster
@@ -93,7 +92,6 @@ public class ArranLidarProjectSample extends Application {
               rasterLayer.setRasterRenderer(hillshadeRenderer);
               // add the raster layer to the scene's operational layers
               arcGISScene.getOperationalLayers().add(rasterLayer);
-
             }
 
             // create an elevation source from the GeoTIFF (raster) collection
@@ -112,11 +110,11 @@ public class ArranLidarProjectSample extends Application {
             arcGISScene.getLoadError().printStackTrace();
           }
         });
-
       } else {
         new Alert(Alert.AlertType.WARNING, "Missing GeoTIFF data").show();
       }
 
+      // when the scene view is draw status is in progress, display a progress indicator
       sceneView.addDrawStatusChangedListener(e -> progressIndicator.setVisible(e.getDrawStatus() == DrawStatus.IN_PROGRESS));
 
       // add the scene view to the stack pane
@@ -127,12 +125,10 @@ public class ArranLidarProjectSample extends Application {
       // finally set the scene to the scene view to load the scene
       sceneView.setArcGISScene(arcGISScene);
 
-      } catch (Exception e){
-        // on any error, display the stack trace.
-        e.printStackTrace();
-      }
-
-
+    } catch (Exception e) {
+      // on any error, display the stack trace.
+      e.printStackTrace();
+    }
   }
 
   /**
