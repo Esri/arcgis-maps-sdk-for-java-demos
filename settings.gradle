@@ -1,1 +1,8 @@
-rootProject.name = 'java-gradle-starter-project'
+import static groovy.io.FileType.DIRECTORIES
+
+// include all Gradle projects two levels down
+file('./').traverse(type: DIRECTORIES, maxDepth: 1) { f ->
+    if(f.isDirectory() && new File(f, "build.gradle").exists()) {
+        includeBuild f.absolutePath
+    }
+}
