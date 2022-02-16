@@ -1,13 +1,14 @@
-# ArcGIS Runtime for Java Demos
+# ArcGIS Runtime API for Java Demos
 
-Welcome to the home of the ArcGIS Runtime for Java demos. This repository contains a number of separate JavaFX applications which demonstrate the use of the ArcGIS Runtime SDK for Java, a geospatial API built by Esri.
+Welcome to the home of the ArcGIS Runtime API for Java demos. This repository contains a number of separate JavaFX applications which demonstrate the use of the ArcGIS Runtime API for Java, a geospatial API built by Esri.
 
 This repository is regularly updated and will cover a range of geospatial workflows using the API, along with comparisons of how your favourite workflows in ArcGIS Pro can be used in ArcGIS Runtime and how they can work together.
 
 ## Content Overview
 
-* Code it: creating hillshade effects using ArcGIS Runtime - an application exploring a simple workflow of using opensource data to produce a hillshade renderer and 3D surface, all in code. 
-
+* Create hillshade effects with geospatial code
+  - An application exploring a simple geospatial workflow of using opensource raster data to produce a hillshade renderer and 3D surface. Find the code in the [Create Hillshade Effects](https://github.com/ArcGIS/arcgis-runtime-java-demos/tree/main/arran-runtime-blog-post) package.
+  - Read the accompanying blog: [ArcGIS Runtime: Create hillshade effects with geospatial code](https://www.esri.com/arcgis-blog/products/api-java/developers/arcgis-runtime-create-hillshade-effects-with-geospatial-code/)
 
 ## Instructions
 
@@ -25,21 +26,21 @@ This repository is regularly updated and will cover a range of geospatial workfl
 1. `cd` into the project's root directory.
 2. Run `./gradlew clean build` on Linux/Mac or `gradlew.bat clean build` on Windows.
 3. Run `./gradlew copyNatives` on Linux/Mac or `gradlew.bat copyNatives` on Windows. This will unpack the native library dependencies to $USER_HOME.arcgis.
-3. Run `./gradlew run` on Linux/Mac or `gradlew.bat run` on Windows to run the app.
+4. Run `./gradlew run` on Linux/Mac or `gradlew.bat run` on Windows to run the app.
 
 ## Requirements
 
-See the Runtime SDK's [system requirements](https://developers.arcgis.com/java/latest/guide/system-requirements.htm).
+See the ArcGIS Runtime API for Java's [system requirements](https://developers.arcgis.com/java/reference/system-requirements/).
 
 ## Resources
 
-* [ArcGIS Runtime SDK for Java](https://developers.arcgis.com/java/)  
+* [ArcGIS Runtime API for Java](https://developers.arcgis.com/java/)  
 * [ArcGIS Blog](https://blogs.esri.com/esri/arcgis/)  
 * [Esri Twitter](https://twitter.com/esri)  
 
 ## Issues
 
-Find a bug or want to request a new feature?  Please let us know by submitting an issue.
+Find a bug or want to request a new demo?  Please let us know by submitting an issue.
 
 ## Contributing
 
@@ -49,16 +50,16 @@ Esri welcomes contributions from anyone and everyone. Please see our [guidelines
 
 Copyright 2022 Esri
 
-Licensed under the Apache License, Version 2.0 (the "License"); you may not 
-use this file except in compliance with the License. You may obtain a copy 
+Licensed under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License. You may obtain a copy
 of the License at
 
 http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software 
-distributed under the License is distributed on an "AS IS" BASIS, WITHOUT 
-WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the 
-License for the specific language governing permissions and limitations 
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations
 under the License.
 
 A copy of the license is available in the repository's license.txt file.
