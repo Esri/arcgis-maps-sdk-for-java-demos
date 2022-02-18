@@ -1,8 +1,8 @@
-# Code it: creating hillshade effects using ArcGIS Runtime #
+# ArcGIS Runtime: Create hillshade effects with geospatial code #
 
 ![Image of 3D hillshade renderer over Goatfell, Arran](3DSurfaceGoatFell.png)
 
-The accompanying blog for this code demo can be found on [the Esri blog webpage](urltobeadded). This demo application can be run via an IDE such as IntelliJ, please see instructions below. 
+The accompanying blog for this code demo can be found on [the Esri blog webpage](https://www.esri.com/arcgis-blog/products/api-java/developers/arcgis-runtime-create-hillshade-effects-with-geospatial-code/). This demo application can be run via an IDE such as IntelliJ, please see instructions below. 
 
 When the demo application launches, simply explore the data by interacting with the scene view via the mouse or keyboard. 
 
@@ -28,4 +28,4 @@ Please note, the data in this sample will automatically download on the first ru
 
 ## Requirements
 
-See the Runtime SDK's [system requirements](https://developers.arcgis.com/java/latest/guide/system-requirements.htm).
+See the Runtime SDK's [system requirements](https://developers.arcgis.com/java/reference/system-requirements/).
