@@ -40,6 +40,8 @@ public class CustomStyleSample extends Application {
 
   private MapView mapView;
   private ArcGISMap map;
+  private SymbolStyle symbolStyle;
+  private Geodatabase geodatabase;
 
   public static void main(String[] args) {
 
@@ -56,8 +58,8 @@ public class CustomStyleSample extends Application {
     stage.show();
 
     // create a JavaFX scene with a stack pane as the root node and add it to the scene
-    StackPane stackPane = new StackPane();
-    Scene scene = new Scene(stackPane);
+    var stackPane = new StackPane();
+    var scene = new Scene(stackPane);
     stage.setScene(scene);
 
     // create a MapView to display the map and add it to the stack pane
@@ -65,14 +67,14 @@ public class CustomStyleSample extends Application {
     stackPane.getChildren().add(mapView);
 
     // create an ArcGISMap with an Open Street Map Basemap
-    OpenStreetMapLayer openStreetMapLayer = new OpenStreetMapLayer();
+    var openStreetMapLayer = new OpenStreetMapLayer();
     map = new ArcGISMap();
-    Basemap basemap = new Basemap();
+    var basemap = new Basemap();
     basemap.getBaseLayers().add(openStreetMapLayer);
     map.setBasemap(basemap);
 
     // load the style and make a renderer
-    UniqueValueRenderer renderer = MakeRendererFromStyle();
+    var renderer = makeRendererFromStyle();
 
     // add the data from mobile geodatabase using the renderer
     addMobileGDBData(renderer);
@@ -81,9 +83,8 @@ public class CustomStyleSample extends Application {
     mapView.setMap(map);
 
     // set an initial viewpoint
-    Point point = new Point(-302209.076759, 7568136.965982);
+    var point = new Point(-302209.076759, 7568136.965982);
     mapView.setViewpointCenterAsync(point, 5000);
-
   }
 
   /**
@@ -91,13 +92,13 @@ public class CustomStyleSample extends Application {
    *
    * @return renderer using symbols in style file
    */
-  private UniqueValueRenderer MakeRendererFromStyle() {
+  private UniqueValueRenderer makeRendererFromStyle() {
     // create the unique value renderer
-    UniqueValueRenderer uniqueValueRenderer = new UniqueValueRenderer();
+    var uniqueValueRenderer = new UniqueValueRenderer();
     uniqueValueRenderer.getFieldNames().add("InsectGroup");
 
     // default symbol
-    SimpleMarkerSymbol simpleMarkerSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.Style.TRIANGLE, 0xFFFF0000,10);
+    var simpleMarkerSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.Style.TRIANGLE, 0xFFFF0000,10);
     uniqueValueRenderer.setDefaultSymbol(simpleMarkerSymbol);
 
     // load the style
@@ -107,39 +108,38 @@ public class CustomStyleSample extends Application {
       if (symbolStyle.getLoadStatus() == LoadStatus.LOADED) {
 
         // create a list of all of the potential symbol names that correspond to the InsectGroup attribute
-        ArrayList<String> symbolNames = new ArrayList<>(Arrays.asList("Beetle", "Fly", "Moth", "Wasp", "Bee"));
+        var symbolNames = new ArrayList<>(Arrays.asList("Beetle", "Fly", "Moth", "Wasp", "Bee"));
 
         // loop through the symbol names to create unique values for each status within the unique value renderer
         for (String symbolName : symbolNames) {
           ListenableFuture<Symbol> searchResult = symbolStyle.getSymbolAsync(Collections.singletonList(symbolName));
           searchResult.addDoneListener(() -> {
             try {
-              Symbol symbol = searchResult.get();
+              var symbol = searchResult.get();
 
               switch (symbolName) {
                 case "Beetle":
-                  UniqueValueRenderer.UniqueValue uniqueBeetleValue =
+                  var uniqueBeetleValue =
                       new UniqueValueRenderer.UniqueValue(symbolName, symbolName, symbol, Collections.singletonList("Beetle"));
                   uniqueValueRenderer.getUniqueValues().add(uniqueBeetleValue);
                   break;
-
                 case "Fly":
-                  UniqueValueRenderer.UniqueValue uniqueFlyValue =
+                  var uniqueFlyValue =
                       new UniqueValueRenderer.UniqueValue(symbolName, symbolName, symbol, Collections.singletonList("Fly"));
                   uniqueValueRenderer.getUniqueValues().add(uniqueFlyValue);
                   break;
                 case "Moth":
-                  UniqueValueRenderer.UniqueValue uniqueMothValue =
+                  var uniqueMothValue =
                       new UniqueValueRenderer.UniqueValue(symbolName, symbolName, symbol, Collections.singletonList("Moth"));
                   uniqueValueRenderer.getUniqueValues().add(uniqueMothValue);
                   break;
                 case "Wasp":
-                  UniqueValueRenderer.UniqueValue uniqueWaspValue =
+                  var uniqueWaspValue =
                       new UniqueValueRenderer.UniqueValue(symbolName, symbolName, symbol, Collections.singletonList("Wasp"));
                   uniqueValueRenderer.getUniqueValues().add(uniqueWaspValue);
                   break;
                 case "Bee":
-                  UniqueValueRenderer.UniqueValue uniqueBeeValue =
+                  var uniqueBeeValue =
                       new UniqueValueRenderer.UniqueValue(symbolName, symbolName, symbol, Collections.singletonList("Bee"));
                   uniqueValueRenderer.getUniqueValues().add(uniqueBeeValue);
                   break;
@@ -161,17 +161,21 @@ public class CustomStyleSample extends Application {
    * @param renderer the renderer to display the insects
    */
   private void addMobileGDBData(Renderer renderer) {
-    Geodatabase geodatabase = new Geodatabase("data/Insect Survey.geodatabase");
+    geodatabase = new Geodatabase("data/Insect Survey.geodatabase");
     geodatabase.loadAsync();
     geodatabase.addDoneLoadingListener(() -> {
       if (geodatabase.getLoadStatus() == LoadStatus.LOADED) {
 
+        // load the table for the InsectRecords
         var table = geodatabase.getGeodatabaseFeatureTable("InsectRecords");
+        table.loadAsync();
+        table.addDoneLoadingListener(() -> {
+          var featureLayer = new FeatureLayer(table);
+          featureLayer.setRenderer(renderer);
 
-        var featureLayer = new FeatureLayer(table);
-        featureLayer.setRenderer(renderer);
-
-        map.getOperationalLayers().add(featureLayer);
+          // add the new layer to the map
+          map.getOperationalLayers().add(featureLayer);
+        });
       }
     });
   }
