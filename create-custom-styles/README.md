@@ -40,7 +40,7 @@ The app launches a window showing data using the custom style file.
 
 ## Requirements
 
-See the Runtime SDK's [system requirements](https://developers.arcgis.com/java/latest/guide/system-requirements.htm).
+See the Runtime SDK's [system requirements](https://developers.arcgis.com/java/reference/system-requirements/).
 
 ## Resources
 

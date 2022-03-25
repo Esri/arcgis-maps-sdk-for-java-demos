@@ -102,7 +102,7 @@ public class CustomStyleSample extends Application {
     uniqueValueRenderer.setDefaultSymbol(simpleMarkerSymbol);
 
     // load the style
-    SymbolStyle symbolStyle = new SymbolStyle("data/Insects.stylx");
+    symbolStyle = new SymbolStyle("data/Insects.stylx");
     symbolStyle.loadAsync();
     symbolStyle.addDoneLoadingListener(() -> {
       if (symbolStyle.getLoadStatus() == LoadStatus.LOADED) {
