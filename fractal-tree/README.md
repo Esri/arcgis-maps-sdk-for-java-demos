@@ -1,12 +1,6 @@
 # create-custom-styles-blog
 
-This is a project to demonstrate the use of custom style files in an ArcGIS Runtime application.  The process of creating and using the custom style in this app is discussed in this [blog](https://www.esri.com/arcgis-blog/?s=#&products=api-java).
-
-The project includes the Gradle wrapper, so there is no need to install Gradle to run the app.
-
-The app launches a window showing data using the custom style file.
-
-![screenshot](screenshot.png)
+This is a project to demonstrate recursive calls using Java to render a tree structure.
 
 ## Instructions
 

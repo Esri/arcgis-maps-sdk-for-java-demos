@@ -13,10 +13,10 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package com.esri.samples.custom_style;
+package com.esri.samples.fractal_tree;
 
-public class CustomStyleLauncher {
+public class FractalTreeLauncher {
   public static void main(String[] args) {
-    CustomStyleSample.main(args);
+    FractalTreeSample.main(args);
   }
 }
