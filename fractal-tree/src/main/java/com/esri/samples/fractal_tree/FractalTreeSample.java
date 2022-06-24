@@ -1,7 +1,6 @@
 package com.esri.samples.fractal_tree;
 
 import com.esri.arcgisruntime.geometry.*;
-import com.esri.arcgisruntime.mapping.Basemap;
 import com.esri.arcgisruntime.mapping.view.Graphic;
 import com.esri.arcgisruntime.mapping.view.GraphicsOverlay;
 import com.esri.arcgisruntime.symbology.*;
@@ -10,10 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 import com.esri.arcgisruntime.mapping.ArcGISMap;
 import com.esri.arcgisruntime.mapping.view.MapView;
-
 import java.util.Random;
 
 
@@ -68,10 +65,25 @@ public class FractalTreeSample extends Application {
     }
   }
 
+  /**
+   * Renderers a tree from a given starting point.
+   * @param startPoint position of base of tree trunk
+   * @param height height of tree trunk
+   * @param maxDepth number of recursions in tree structuire
+   * @param branchAngle the angle of the tree branches
+   */
   private void makeFractalTree(Point startPoint, double height, int maxDepth, double branchAngle) {
     drawBranch(startPoint, height, 0, 1, maxDepth);
   }
 
+  /**
+   * Method to draw a tree branch which is called recursively to draw further branches connected to this one
+   * @param pt start point of branch
+   * @param length length of the branch
+   * @param angle the angle of the brance
+   * @param depth the current depth of the tree (number of recursions at this point in the tree)
+   * @param maxDepth the total depth of the tree (max recursions)
+   */
   private void drawBranch (Point pt, double length, double angle, int depth, int maxDepth) {
     // end point of next branch
     Point endPoint = makePointAtAngle(pt, length, angle);
@@ -106,6 +118,14 @@ public class FractalTreeSample extends Application {
 
   }
 
+  /**
+   * Method which creates a point from in input point at a given distance and bearing angle
+   *
+   * @param startPosition the input point
+   * @param length distance of new point from input point
+   * @param angle the bearing angle the new point will be from the input point
+   * @return Point
+   */
   private Point makePointAtAngle(Point startPosition, double length, double angle) {
     Point point;
     double x = (length * Math.sin(Math.toRadians(angle))) + startPosition.getX();
